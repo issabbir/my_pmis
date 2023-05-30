@@ -1,0 +1,46 @@
+<template>
+  <div class="row">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-dark text-white border-0 rounded-0" id="basic-addon1">All NEWS :</span>
+                    </div>
+                    <marquee class="form-control rounded-0">
+                        <div class="d-flex align-items-center">
+                            <i class="bx bx-label"></i>
+                            <span>&nbsp;&nbsp;"Notice to Mariners", Circular Number - 50/2019&nbsp;&nbsp;</span>
+                            <i class="bx bx-label"></i>
+                            <span>&nbsp;&nbsp;Job Circular about the position of "Store Keeper", Job Circular Number - 10/2019&nbsp;&nbsp;</span>
+                            <i class="bx bx-label"></i>
+                            <span>&nbsp;&nbsp;Job Circular about the position of Assistant Engineer (Marine)</span>
+                        </div>
+                    </marquee>
+                </div>
+            </div>
+        </div>
+    </div>
+                                     <ol class="breadcrumb p-2 mb-0">
+                                        <li class="breadcrumb-item"><a href="index.html"><i class="bx bx-home-alt"></i></a></li>
+                                        <li class="breadcrumb-item" v-if="isBreadCrubs" v-for="b in breadCrumbs"><a href="#">{{b.label}}</a></li>
+                                     </ol>
+            </div>
+        </div>
+<script>
+    export default {
+        computed: {
+            isBreadCrubs: function() {
+                this.breadCrumbs = this.$store.state.breadCrumbs;
+                //if(this.breadCrumbs.length>0)
+                    return true;
+            }
+        },
+        mounted() {
+            this.breadCrumbs = this.$store.getters.breadCrumbs;
+        },
+        data() {
+            return {
+                "breadCrumbs":""
+            }
+        }
+    }
+</script>

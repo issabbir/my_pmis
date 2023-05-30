@@ -1,0 +1,11 @@
+Payroll
+  month_id  = month list in combo
+  pr_year  =  Fiscal Year in combo
+  department_id = Department in combo
+  bill_code = Bill Code in combo
+
+
+
+  php artisan serve --host=192.168.1.29
+
+

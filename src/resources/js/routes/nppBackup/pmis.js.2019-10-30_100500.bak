@@ -1,0 +1,8 @@
+import dashboard from '../components/pims/dashboard';
+import employee from '../components/pims/employee';
+const pmis = [
+    { path: '/', component: dashboard},
+	{ path: '/employee/add', component: employee},
+];
+
+export default pmis;

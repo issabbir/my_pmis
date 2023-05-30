@@ -1,0 +1,6 @@
+import dashboard from '../components/pims/dashboard';
+const pmis = [
+    { path: '/', component: dashboard},
+];
+
+export default pmis;

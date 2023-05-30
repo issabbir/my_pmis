@@ -1,0 +1,615 @@
+<template>
+    <div class="content-body">
+        <div id="stacked-pill">
+            <div class="col-md-12">
+                <div class="card bg-transparent border">
+                    <div class="card-content">
+                        <div class="card-body pt-1">
+                            <div class="pills-stacked">
+                                <div class="row">
+                                    <div class="col-md-2 col-sm-12 border-right pr-md-0">
+                                        <SideBar></SideBar>
+                                    </div>
+                                    <div class="col-md-10 col-sm-12 border-right pr-md-0">
+                                        <b-card title="Card Title">
+                                            <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+                                                <div class="col-md-6 p-0">
+                                                    <b-form-group
+                                                        id="fieldset-1"
+                                                        label="Employee Id"
+
+                                                        label-for="empid">
+                                                        <b-form-input id="empid" v-model="employee.BasicInfo.emp_id" placeholder="Employee Id" disabled trim></b-form-input>
+                                                    </b-form-group>
+                                                </div>
+
+                                                <b-row>
+                                                        <b-col md="3">
+                                                            <b-form-group
+                                                                label="Title"
+                                                                label-for="title"
+                                                            >
+                                                            <b-form-select v-model="employee.BasicInfo.employeeTitle" :options="employeeTitleList" class="">  </b-form-select>
+
+                                                            </b-form-group>
+                                                        </b-col>
+                                                        <b-col md="3">
+                                                            <b-form-group
+                                                                label="First Name"
+                                                                label-for="fname"
+                                                            >
+                                                                <b-form-input
+                                                                    id="first_name"
+                                                                    v-model="form.first_name"
+                                                                    type="text"
+                                                                    required
+                                                                    placeholder="Enter First Name"
+                                                                ></b-form-input>
+                                                            </b-form-group>
+                                                        </b-col>
+                                                        <b-col md="3">
+                                                            <b-form-group
+                                                                label="MIDDLE NAME"
+                                                                label-for="mname"
+                                                            >
+                                                                <b-form-input
+                                                                    id="mname"
+                                                                    v-model="form.mname"
+                                                                    type="text"
+                                                                    required
+                                                                    placeholder="Enter Middle Name"
+                                                                ></b-form-input>
+                                                            </b-form-group>
+                                                        </b-col>
+                                                        <b-col md="3">
+                                                            <b-form-group
+                                                                label="LAST NAME"
+                                                                label-for="lname"
+                                                            >
+                                                                <b-form-input
+                                                                    id="lname"
+                                                                    v-model="form.lname"
+                                                                    type="text"
+                                                                    required
+                                                                    placeholder="Enter Last Name"
+                                                                ></b-form-input>
+                                                            </b-form-group>
+                                                        </b-col>
+                                                    </b-row>
+                                                <b-row>
+                                                    <b-col md="3">
+                                                        <b-form-group
+                                                            label="Division"
+                                                            label-for="division"
+                                                        >
+                                                            <b-form-select  v-model="selected" class="">
+                                                                <option >Please select a Division</option>
+                                                                <option value="1">Chairman</option>
+                                                                <option value="2">Member (Engineering)</option>
+                                                                <option value="3">Member (Harbor and Marine)</option>
+                                                                <option value="4" >Member (Admin and Planning)</option>
+                                                                <option value="4" >Member (Finance)</option>
+                                                                <option value="4" >Chittagong Port Authority</option>
+                                                            </b-form-select>
+
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group
+                                                            label="DEPARTMENT"
+                                                            label-for="department"
+                                                        >
+                                                            <b-form-select v-model="selected" class="">
+                                                                <option >Please select a Department</option>
+                                                                <option value="1">Security</option>
+                                                                <option value="2">Traffic</option>
+                                                                <option value="3">Administration</option>
+                                                                <option value="4" >Planning</option>
+                                                                <option value="4" >Secretariat</option>
+                                                                <option value="4" >Medical</option>
+                                                                <option value="7" >Finance &amp; Accounts </option>
+                                                            </b-form-select>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group
+                                                            label="SECTION"
+                                                            label-for="section"
+                                                        >
+                                                            <b-form-select v-model="selected" class="">
+                                                                <option>Please select a SECTION</option>
+                                                                <option value="1" >Budget section</option>
+                                                                <option value="2" >Administration section  </option>
+                                                                <option value="3" >Charity and cumulative insurance section</option>
+                                                                <option value="4" >Warehouse accounts section</option>
+                                                                <option value="5" >Provident fund section</option>
+                                                                <option value="6" >Salary and allowance section-1</option>
+                                                                <option value="7" >Salary and allowance section-2</option>
+                                                            </b-form-select>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group
+                                                            label="DESIGNATION"
+                                                            label-for="designation"
+                                                        >
+                                                            <b-form-select v-model="selected" class="">
+                                                                <option >Please select a DESIGNATION</option>
+                                                                <option value="1" >Chairman</option>
+                                                                <option value="2" >General Manager(A&amp;F)</option>
+                                                                <option value="3" >General Manager(Admin)</option>
+                                                                <option value="4" >Cheif Engineer</option>
+                                                                <option value="5">Head of ICT</option>
+                                                            </b-form-select>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col md="3">
+                                                        <b-form-group
+                                                            label="Employee type:"
+                                                            label-for="employee_type"
+                                                        >
+                                                            <b-form-select v-model="selected" class="">
+                                                                <option >Please select a Employee Type</option>
+                                                                <option value="1" >Officer</option>
+                                                                <option value="5">Stuff</option>
+                                                            </b-form-select>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group
+                                                            label="Quota:"
+                                                            label-for="quota"
+                                                        >
+                                                            <b-form-select v-model="selected" class="">
+                                                                <option >Please select a Employee Type</option>
+                                                                <option value="1" >Freedom Fighter Quota</option>
+                                                                <option value="2" >Women Quota</option>
+                                                                <option value="3" >Handicapped Quota</option>
+                                                                <option value="4" >Tribal Quota</option>
+                                                                <option value="5" >Dependent Quota</option>
+                                                            </b-form-select>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group
+                                                            label="security ID"
+                                                            label-for="security"
+                                                        >
+                                                            <b-form-input
+                                                                id="security_id"
+                                                                v-model="form.security_id"
+                                                                type="text"
+                                                                required
+                                                                placeholder="Enter Title security ID "
+                                                            ></b-form-input>
+                                                        </b-form-group>
+                                                    </b-col>
+
+                                                </b-row>
+
+                                                <b-row>
+                                                    <b-col>
+                                                        <b-form-group
+                                                            label="Father’s Name"
+                                                            label-for="Father_Name"
+                                                        >
+                                                            <b-form-input
+                                                                id="security_id"
+                                                                v-model="form.security_id"
+                                                                type="text"
+                                                                required
+                                                                placeholder="Enter Title Father_Name"
+                                                            ></b-form-input>
+
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col>
+                                                        <b-form-group
+                                                            label="Mother’s  Name"
+                                                            label-for="Mname"
+                                                        >
+                                                            <b-form-input
+                                                                id="mname"
+                                                                v-model="form.email"
+                                                                type="text"
+                                                                required
+                                                                placeholder="Enter Mother’s  Name"
+                                                            ></b-form-input>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col>
+                                                        <b-form-group
+                                                            label="NID/Birth Cert. No"
+                                                            label-for="nid"
+                                                        >
+                                                            <div>
+                                                                <b-input-group>
+                                                                    <template v-slot:prepend>
+                                                                        <b-dropdown size="sm" text="NID" variant="">
+                                                                            <b-dropdown-item>NID</b-dropdown-item >
+                                                                            <b-dropdown-item>BCN</b-dropdown-item>
+                                                                        </b-dropdown>
+                                                                    </template>
+
+                                                                    <b-form-input placeholder="NID/BCN"></b-form-input>
+
+
+                                                                </b-input-group>
+                                                            </div>
+                                                        </b-form-group>
+
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group
+                                                            label="Passport No"
+                                                            label-for="Passport"
+                                                        >
+                                                            <b-form-input
+                                                                id="Passport"
+                                                                v-model="form.email"
+                                                                type="text"
+                                                                required
+                                                                placeholder="Enter Passport No"
+                                                            ></b-form-input>
+
+                                                        </b-form-group>
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col md="3">
+                                                        <b-form-group
+                                                            label="Mobile No"
+                                                            label-for="mobile"
+                                                        >
+                                                            <b-form-input
+                                                                id="Mobile"
+                                                                v-model="form.email"
+                                                                type="text"
+                                                                required
+                                                                placeholder="Enter Mobile No"
+                                                            ></b-form-input>
+
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group
+                                                            label="E-Mail"
+                                                            label-for="E-Mail"
+                                                        >
+                                                            <b-form-input
+                                                                id="E-Mail"
+                                                                v-model="form.email"
+                                                                type="text"
+                                                                required
+                                                                placeholder="Enter E-Mail"
+                                                            ></b-form-input>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group
+                                                            label="Date of Birth"
+                                                            label-for="section"
+                                                        >
+                                                            <date-picker v-model="form.datetime" width="100%" input-class="form-control"  type="date" lang="en" format="YYYY-MM-DD"> aa</date-picker>
+
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group
+                                                            label="Age"
+                                                            label-for="Age"
+                                                        >
+                                                            <b-form-input
+                                                                id="E-Mail"
+                                                                v-model="form.email"
+                                                                type="text"
+                                                                required
+                                                                readonly
+                                                            ></b-form-input>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col md="3">
+                                                        <b-form-group
+                                                            label="Blood Group:"
+                                                            label-for="blood"
+                                                        >
+                                                            <b-form-select v-model="selected" class="">
+                                                                <option >Please select a Employee Type</option>
+                                                                <option value="A+" >A+</option>
+                                                                <option value="A-" >A-</option>
+                                                                <option value="B+" >B+</option>
+                                                                <option value="B-" >B-</option>
+                                                                <option value="AB+" >AB+</option>
+                                                                <option value="AB-" >AB-</option>
+                                                                <option value="O+" >O+</option>
+                                                                <option value="O-" >O-</option>
+                                                            </b-form-select>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+
+                                                        <b-form-group
+                                                            label="Gender"
+                                                            label-for="gender"
+                                                        >
+                                                            <b-form-radio-group
+                                                                v-model="selected"
+                                                                :options="options"
+                                                                name="radio-inline"
+                                                            ></b-form-radio-group>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group
+                                                            label="Marital Status"
+                                                            label-for="Marital"
+                                                        >
+                                                            <b-form-select v-model="selected" class="">
+                                                                <option value="u" >Unmarried</option>
+                                                                <option value="m" >Married</option>
+                                                                <option value="d" >Divorce</option>
+                                                                <option value="w" >Widow</option>
+                                                            </b-form-select>
+                                                        </b-form-group>
+                                                    </b-col>
+
+                                                    <b-col>
+                                                        <b-form-group
+
+                                                            label="Nationality "
+                                                            label-for="nationality"
+                                                        >
+                                                            <b-form-select v-model="selected" class="">
+                                                                <option value="1" >Bangladeshi</option>
+                                                                <option value="2" >Afghanistan</option>
+                                                                <option value="3" >Albania</option>
+                                                                <option value="4" >Algeria</option>
+                                                                <option value="5" >Andorra</option>
+                                                                <option value="6" >Angola</option>
+                                                                <option value="7" >Antigua and Barbuda</option>
+                                                            </b-form-select>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col>
+                                                        <b-form-group
+                                                            label="Spouse Name"
+                                                            label-for="spouse"
+                                                        >
+                                                            <b-form-input
+                                                                id="spouse"
+                                                                v-model="form.email"
+                                                                type="text"
+                                                                required
+                                                                readonly
+                                                            ></b-form-input>
+
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col>
+                                                        <b-form-group
+                                                            label="Spouse Mobile No"
+                                                            label-for="smoblino"
+                                                        >
+                                                            <b-form-input
+                                                                id="smoblino"
+                                                                v-model="form.email"
+                                                                type="text"
+                                                                required
+                                                                placeholder="Mobline no"
+                                                            ></b-form-input>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col>
+                                                        <b-form-group
+                                                            label="Date of Birth"
+                                                            label-for="section"
+                                                        >
+                                                            <date-picker v-model="form.datetime" width="100%" input-class="form-control"  type="date" lang="en" format="YYYY-MM-DD"> </date-picker>
+
+                                                        </b-form-group>
+
+                                                    </b-col>
+                                                    <b-col>
+                                                        <b-form-group
+                                                            label="LAST NAME"
+                                                            label-for="lname"
+                                                        >
+                                                            <b-form-input
+                                                                id="lname"
+                                                                v-model="form.email"
+                                                                type="text"
+                                                                required
+                                                                placeholder="Enter Last Name"
+                                                            ></b-form-input>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row >
+                                                            <b-col cols="3">
+                                                                <b-form-group
+                                                                    label="Religion"
+                                                                    label-for="religion"
+                                                                >
+                                                                    <b-form-select class="select2 form-control" id="religion" name="religion">
+                                                                        <option value="1" >Islam</option>
+                                                                        <option value="3" >Hinduism</option>
+                                                                        <option value="2" >Christianity</option>
+                                                                        <option value="4" >Buddhism</option>
+                                                                        <option value="5" >Others</option>
+                                                                    </b-form-select>
+                                                                </b-form-group>
+                                                            </b-col>
+                                                            <b-col cols="3">
+                                                                <b-form-group
+                                                                    label="Identity symbol"
+                                                                    label-for="Idsymbol"
+                                                                >
+                                                                    <b-form-input
+                                                                        id="symbol"
+                                                                        v-model="form.email"
+                                                                        type="text"
+                                                                        required
+                                                                        placeholder="Enter Title"
+                                                                    ></b-form-input>
+                                                                </b-form-group>
+                                                            </b-col>
+                                                </b-row>
+                                                <div class="col-md-12 pr-0 d-flex justify-content-end">
+                                                    <b-button type="submit" id="basic_sub_btn" class="btn btn-dark shadow mr-1 mb-1">Save</b-button>
+                                                    <b-button type="reset" class="btn btn-outline-dark mr-1 mb-1">Cancel</b-button>
+                                                </div>
+                                            </b-form>
+
+
+                                        </b-card>
+                                        <b-card
+                                        >
+                                            <b-row>
+                                                <b-col>
+                                                    <b-form-group
+                                                        label="Emergency Contact Person"
+                                                        label-for="EmergContPerson"
+                                                    >
+                                                        <b-form-input
+                                                            id="idperson"
+                                                            v-model="form.email"
+                                                            type="text"
+                                                            required
+                                                            placeholder="Enter Title"
+                                                        ></b-form-input>
+
+                                                    </b-form-group>
+                                                </b-col>
+                                                <b-col>
+                                                    <b-form-group
+                                                        label="Relation"
+                                                        label-for="fname"
+                                                    >
+                                                        <b-form-select class="select2 form-control" id="relation" name="relation">
+                                                            <option value="1" >Father</option>
+                                                            <option value="2" >Mother</option>
+                                                            <option value="3" >Brother</option>
+                                                            <option value="4" >Sister</option>
+                                                            <option value="5" >Wife</option>
+                                                            <option value="6" >Husband</option>
+                                                            <option value="7" >Daughter</option>
+                                                            <option value="8" >Son</option>
+                                                            <option value="9" >Friend</option>
+                                                        </b-form-select>
+                                                    </b-form-group>
+                                                </b-col>
+                                                <b-col>
+                                                    <b-form-group
+                                                        label="Mobile No"
+                                                        label-for="mobileno"
+                                                    >
+                                                        <b-form-input
+                                                            id="mbno"
+                                                            v-model="form.email"
+                                                            type="text"
+                                                            required
+                                                            placeholder="Enter Middle Name"
+                                                        ></b-form-input>
+                                                    </b-form-group>
+                                                </b-col>
+
+                                            </b-row>
+
+                                        </b-card>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+
+    import DatePicker from 'vue2-datepicker';
+    import SideBar from "../partials/sidebar";
+    import employee from '../../../json/employee.json'; //data edit
+    // json.forEach(x => { console.log(x.emp_id, x.lastname); });
+
+    export default {
+        components: { DatePicker, SideBar},
+        data() {
+            return {
+
+                form:{
+
+                },
+                datetime: new Date(),
+               // basic_info:[],
+                //employee:{'BasicInfo':{
+                        //emp_id: 1,
+                       // datetime: new Date(),
+                       //employeeTitle : null,
+                        //first_name:null
+                        //shipname : null,
+                        //category : null,
+                   // }
+               // },
+
+                //employee:{},
+
+                form:{
+
+                },
+                employee:{ basic_info:{
+                        emp_id : 1224,
+                        employeeTitle: null
+                    }},
+
+                employeeTitleList: [
+                  { text: 'MR.', value: 'MR.' },
+                  { text: 'MRS.', value: 'MRS.' }
+                ],
+                selected: 'first',
+                options: [
+                    { text: 'Male', value: '' },
+                    { text: 'Female', value: 'second' },
+                    { text: 'Other', value: 'third' }
+                ],
+                foods: [{text: 'Select One', value: null}, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
+                show: true
+            }
+        },
+        methods: {
+
+            onSubmit(evt) {
+                evt.preventDefault();
+                alert(JSON.stringify(this.employee))
+            },
+            onReset(evt) {
+                evt.preventDefault();
+                // Reset our form values
+                this.form.email = ''
+                this.form.emp_id = ''
+                this.form.first_name=''
+                this.form.lname=''
+               this.form.mname=''
+                this.form.employeeTitle = ''
+                this.form.food = null;
+                this.form.checked = [];
+                // Trick to reset/clear native browser form validation state
+                this.show = false;
+                this.$nextTick(() => {
+                    this.show = true
+                })
+            }
+        }
+    }
+</script>
+

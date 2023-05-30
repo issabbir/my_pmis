@@ -1,0 +1,182 @@
+
+<template>
+    <div class="content-body">
+        <div id="stacked-pill">
+            <div class="col-md-12">
+                <div class="card bg-transparent border">
+                    <div class="card-content">
+                        <div class="card-body pt-1">
+                            <div class="pills-stacked">
+                                <div class="row">
+                                    <div class="col-md-2 col-sm-12 border-right pr-md-0">
+                                        <SideBar></SideBar>
+                                    </div>
+                                    <div class="col-md-10 col-sm-12 border-right pr-md-0">
+                                        <b-row>
+                                            <b-col>
+                                                <b-card title="Transfer">
+                                                    <b-row>
+                                                        <b-col sm="2" md="2" class="my-1">
+                                                            <b-form-group
+                                                                label="Per page"
+                                                                label-cols-sm="6"
+                                                                label-cols-md="6"
+                                                                label-cols-lg="6"
+                                                                label-align-sm="left"
+                                                                label-size="sm"
+                                                                label-for="perPageSelect"
+                                                                class="mb-0"
+                                                            >
+                                                                <b-form-select
+                                                                    v-model="perPage"
+                                                                    id="perPageSelect"
+                                                                    size="sm"
+                                                                    :options="pageOptions"
+                                                                ></b-form-select>
+                                                            </b-form-group>
+                                                        </b-col>
+                                                        <b-col sm="3" md="3" class="my-1 ml-auto">
+                                                            <b-input-group size="sm">
+                                                                <b-form-input
+                                                                    v-model="filter"
+                                                                    type="search"
+                                                                    label-align-sm="right"
+                                                                    id="filterInput"
+                                                                    placeholder="Type to Search"
+                                                                ></b-form-input>
+                                                                <b-input-group-append>
+                                                                    <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+                                                                </b-input-group-append>
+                                                            </b-input-group>
+                                                        </b-col>
+                                                    </b-row>
+                                                    <b-table striped responsive hover show-empty :items="items" :current-page="currentPage" :per-page="perPage" :filter="filter" :sort-by.sync="sortBy"
+                                                             :sort-desc.sync="sortDesc" :sort-direction="sortDirection">
+                                                        <template v-slot:cell(name)="row">
+                                                            {{ row.value.first }} {{ row.value.last }}
+                                                        </template>
+                                                        <template v-slot:cell(actions)="row">
+                                                            <b-button size="sm" @click="info(row.item, row.index, $event.target)" class="mr-1">
+                                                                Info modal
+                                                            </b-button>
+                                                            <b-button size="sm" @click="row.toggleDetails">
+                                                                {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
+                                                            </b-button>
+                                                        </template>
+                                                    </b-table>
+                                                    <b-col sm="12" md="12" class="my-1">
+                                                        <b-pagination
+                                                            v-model="currentPage"
+                                                            :total-rows="totalRows"
+                                                            :per-page="perPage"
+                                                            align="right"
+                                                            size="sm"
+                                                            class="my-0"
+                                                        ></b-pagination>
+                                                    </b-col>
+                                                </b-card>
+                                            </b-col>
+
+                                        </b-row>
+
+
+
+                                        <div class="col-md-12 pr-0 d-flex justify-content-end">
+                                            <b-button type="button" id="basic_sub_btn" class="btn btn-dark shadow mr-1 mb-1">Save</b-button>
+                                            <b-button type="reset" class="btn btn-outline-dark mr-1 mb-1">Cancel</b-button>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+
+    import DatePicker from 'vue2-datepicker';
+    import SideBar from "../partials/sidebar";
+
+    export default {
+        components: { DatePicker, SideBar},
+        data() {
+            return {
+                form: {
+                    datetime: new Date(),
+                },
+                selected: 'first',
+                options: [
+                    { text: 'Male', value: '' },
+                    { text: 'Female', value: 'second' },
+                    { text: 'Other', value: 'third' }
+                ],
+                designation: 'Barishal',
+                e_designation: [
+                    { value: 'Barishal', text: 'Barishal' },
+                    { value: 'B', text: 'Option B' },
+                    { value: 'D', text: 'Option C', notEnabled: true },
+                    { value: { d: 1 }, text: 'Option D' }
+                ],
+                items: [
+                    { SLID : 'abc', Designation: ' abc', PayScale: '125469', JoiningDate : '09/02/2019',ReleaseDate:'10/10/2019',Location:'XYZ',  action: 'Not Done' },
+                ],
+                res: "This is some text.\nIt is read only and doesn't look like an input.",
+                foods: [{text: 'Select One', value: null}, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
+                show: true,
+                totalRows: 1,
+                currentPage: 1,
+                perPage: 5,
+                pageOptions: [5, 10, 15],
+                sortBy: '',
+                sortDesc: false,
+                sortDirection: 'asc',
+                filter: null,
+                filterOn: [],
+                infoModal: {
+                    id: 'info-modal',
+                    title: '',
+                    content: ''
+                }
+            }
+        },
+        mounted() {
+            this.$store.commit("setBreadcrumbEmpty");
+            this.$store.commit("setBreadcrumb", { link: "#", label: "Marine"});
+            this.$store.commit("setBreadcrumb", { link: "#", label: "Radio Control Room"});
+            this.$store.commit("setBreadcrumb", { link: "#", label: "Incident" });
+            this.totalRows = this.items.length
+        },
+        methods: {
+            onSubmit(evt) {
+                evt.preventDefault()
+                alert(JSON.stringify(this.form))
+            },
+            onReset(evt) {
+                evt.preventDefault()
+                // Reset our form values
+                this.form.email = ''
+                this.form.name = ''
+                this.form.food = null
+                this.form.checked = []
+                // Trick to reset/clear native browser form validation state
+                this.show = false
+                this.$nextTick(() => {
+                    this.show = true
+                })
+            },
+            onFiltered(filteredItems) {
+                // Trigger pagination to update the number of buttons/pages due to filtering
+                this.totalRows = filteredItems.length
+                this.currentPage = 1
+            }
+        }
+    }
+</script>
+

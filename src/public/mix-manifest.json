@@ -1,0 +1,19 @@
+{
+    "/js/accounts.js": "/js/accounts.js?id=101b9c0fdcc4e9e41101",
+    "/js/admin.js": "/js/admin.js?id=44b7282d304a849bbccb",
+    "/js/application_service.js": "/js/application_service.js?id=9e6408bca2f9196b05cb",
+    "/js/approval_service.js": "/js/approval_service.js?id=8898804892eeaf22d9ab",
+    "/js/attendance.js": "/js/attendance.js?id=c658ea3babe834017b29",
+    "/js/cmdb.js": "/js/cmdb.js?id=6b68bde85c696b9c6d77",
+    "/js/dashboard.js": "/js/dashboard.js?id=2b412c02868717c3751c",
+    "/js/leave.js": "/js/leave.js?id=b5ff94ad5e4de7c4d96a",
+    "/js/loan.js": "/js/loan.js?id=e99b83129eda91214d18",
+    "/js/overtime.js": "/js/overtime.js?id=edcb516b2a065e3388d9",
+    "/js/payroll.js": "/js/payroll.js?id=6f535fdc2380d9adbda0",
+    "/js/pension.js": "/js/pension.js?id=b59666739e539ba263c2",
+    "/js/pmis.js": "/js/pmis.js?id=c3f622855368c672bfba",
+    "/css/app.css": "/css/app.css?id=06421a272981d8aff1b9",
+    "/js/pmis_acr.js": "/js/pmis_acr.js?id=f217f3b8654b6dfa4a16",
+    "/js/pmis_operations.js": "/js/pmis_operations.js?id=d35de042fb56e35e4a8b",
+    "/js/pmis_provident_fund.js": "/js/pmis_provident_fund.js?id=53a84b725e1e72efe53d"
+}
